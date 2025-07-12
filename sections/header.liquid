@@ -1,16 +1,16 @@
 {{ 'base.css' | asset_url | stylesheet_tag }}
 
 <header class="figma-header">
-  <!-- Navigation Menu -->
-  <nav class="figma-header__nav">
-    <ul class="figma-header__menu">
-      <li><a href="{{ routes.root_url }}" class="figma-header__link">Home</a></li>
-      <li><a href="{{ routes.all_products_collection_url }}" class="figma-header__link product">Products</a></li>
-    </ul>
-  </nav>
-
+<nav class="figma-header__nav">
+  <ul class="figma-header__menu">
+    <li><a href="{{ routes.root_url }}" class="figma-header__link">Home</a></li>
+    <li><a href="{{ routes.all_products_collection_url }}" class="figma-header__link product">Products</a></li>
+    <li class="mobile-only"><a href="{{ routes.cart_url }}" class="figma-header__link">Cart</a></li>
+    <li class="mobile-only"><a href="/pages/contact" class="figma-header__link">Contact</a></li>
+  </ul>
+</nav>
   <!-- Logo / Title -->
-  <div class="figma-header__logo-wrapper">
+  <div class="figma-header__logo-wrapper mobile">
     <a href="/" class="figma-header__logo-link">
       {% if settings.logo != blank %}
         {% assign logo_alt = settings.logo.alt | default: shop.name | escape %}
@@ -22,6 +22,14 @@
         <h1 class="figma-header__shop-title">{{ shop.name }}</h1>
       {% endif %}
     </a>
+    <!-- Hamburger SVG -->
+    <button class="figma-header__toggle" aria-label="Toggle menu">
+    <svg width="56" height="56" viewBox="0 0 56 56" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <rect width="56" height="56" rx="10" fill="#C2B4A3"/>
+      <path fill-rule="evenodd" clip-rule="evenodd" d="M17.5 21.875C17.5 21.3918 17.8918 21 18.375 21H37.625C38.1082 21 38.5 21.3918 38.5 21.875C38.5 22.3582 38.1082 22.75 37.625 22.75H18.375C17.8918 22.75 17.5 22.3582 17.5 21.875ZM17.5 28C17.5 27.5168 17.8918 27.125 18.375 27.125H37.625C38.1082 27.125 38.5 27.5168 38.5 28C38.5 28.4832 38.1082 28.875 37.625 28.875H18.375C17.8918 28.875 17.5 28.4832 17.5 28ZM27.125 34.125C27.125 33.6418 27.5168 33.25 28 33.25H37.625C38.1082 33.25 38.5 33.6418 38.5 34.125C38.5 34.6082 38.1082 35 37.625 35H28C27.5168 35 27.125 34.6082 27.125 34.125Z" fill="#1A1A1A"/>
+    </svg>
+
+    </button>
   </div>
 
   <!-- Cart + Contact -->
@@ -35,7 +43,6 @@
     </a>
     <a href="/pages/contact" class="figma-header__contact">Contact</a>
   </div>
-
 </header>
 
 <div class="left-svg">
@@ -50,10 +57,32 @@
     <line y1="-0.328571" x2="26.2857" y2="-0.328571" transform="matrix(-1 0 0 1 46 46)" stroke="#404040" stroke-width="0.657143" stroke-dasharray="3.29 3.29"/>
     <line y1="-0.328571" x2="26.2857" y2="-0.328571" transform="matrix(4.37114e-08 -1 -1 -4.37114e-08 0 26.2857)" stroke="#404040" stroke-width="0.657143" stroke-dasharray="3.29 3.29"/>
   </svg>
-
 </div>
 
+<script>
+  document.addEventListener("DOMContentLoaded", function () {
+    const toggle = document.querySelector(".figma-header__toggle");
+    const nav = document.querySelector(".figma-header__nav");
+
+    toggle.addEventListener("click", function () {
+      nav.classList.toggle("active");
+    });
+  });
+</script>
+
 <style>
+  .mobile-view{
+    display: none;
+  }
+
+  .mobile-only {
+    display: none;
+  }
+
+  .figma-header__toggle {
+    display: none;
+  }
+
   .left-svg {
     position: absolute;
     top: 60px;
@@ -147,7 +176,109 @@
     font-weight: 500;
   }
 
+@media screen and (max-width: 768px) {
+  
+  .figma-header__link {
+    font-size: 14px;
+    text-decoration: none;
+    color: white;
+    background-color: transparent;
+    padding: 0;
+  }
 
+  .mobile{
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+  }
+    .mobile-only {
+    display: block; /* show only on mobile */
+  }
+  
+   .figma-header__actions {
+    display: none;
+  }
+
+  .figma-header__nav.active .figma-header__menu::after {
+    content: '';
+    display: block;
+    margin-top: 12px;
+  }
+
+  .figma-header__nav {
+    display: none;
+    width: 100%;
+    flex-direction: column;
+    margin-top: 12px;
+  }
+
+  .figma-header__nav.active {
+    display: flex;
+  }
+
+  .figma-header__menu {
+    flex-direction: column;
+    gap: 8px;
+    padding: 0;
+  }
+
+  .figma-header__link {
+    width: 100%;
+    text-align: center;
+    padding: 12px;
+    font-size: 16px;
+  }
+
+  .figma-header__toggle {
+    display: block;
+    background: none;
+    border: none;
+    margin-left: auto;
+    cursor: pointer;
+  }
+
+  .figma-header__logo-wrapper {
+    text-align: center;
+    margin-top: 8px;
+  }
+
+  .figma-header__logo {
+    max-width: 160px;
+    margin: 0 auto;
+    display: block;
+  }
+
+  .figma-header__actions {
+    flex-direction: column;
+    align-items: center;
+    gap: 12px;
+    margin-top: 12px;
+  }
+
+  .figma-header__icon,
+  .figma-header__contact {
+    width: 100%;
+    justify-content: center;
+    text-align: center;
+  }
+
+  .left-svg,
+  .right-svg {
+    display: none;
+  }
+
+  .figma-header__toggle {
+  display: block;
+  background: none;
+  border: none;
+  margin-left: auto;
+  cursor: pointer;
+}
+.figma-header {
+  justify-content: space-around;
+}
+
+}
 </style>
 
 {% schema %}
