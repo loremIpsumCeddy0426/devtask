@@ -1,0 +1,187 @@
+<!-- sections/trends-grid.liquid -->
+<section class="trends">
+<div class="trends-grid-section">
+  <div class="section-header-trend">
+    <h1>Crafting Trends, Inspiring Confidence</h1>
+    <p>{{ section.settings.section_subtext }}</p>
+  </div>
+
+<div class="trends-grid">
+  {% for block in section.blocks %}
+    <div class="trend-item" {{ block.shopify_attributes }}>
+      {% if block.settings.icon != blank %}
+        <div class="trend-icon">
+         <img
+            src="{{ block.settings.icon | image_url: width: 64 }}"
+            alt="{{ block.settings.title | escape }}"  
+            loading="lazy"
+            width="64"
+            height="64"
+            />
+        </div>
+      {% endif %}
+      {% if block.settings.title != blank %}
+        <h2 class="trend-title">{{ block.settings.title }}</h2>
+      {% endif %}
+      {% if block.settings.description != blank %}
+        <p class="trend-description">{{ block.settings.description }}</p>
+      {% endif %}
+
+    {% if block.settings.floating_icon != blank %}
+        <div class="floating-icon">
+            <img 
+            src="{{ block.settings.floating_icon | image_url: width: 80 }}"
+            alt="Floating icon"
+            width="200"
+            height="200"
+            loading="lazy"
+        />
+  </div>
+{% endif %}
+    </div>
+  {% endfor %}
+  
+
+</div>
+</div>
+</section>
+<style>
+    .section-header-trend{
+        padding: 0 0 0 60px;
+    }
+
+    .section-header-trend h1{
+        color: #fff;
+        font-size: 38px;
+        margin: 60px 0 0 0 !important;
+    }
+
+    .section-header-trend p{
+        color: #676665;
+        font-size: 16px;
+        margin: 24px 0 60px 0 !important;
+    }
+
+    .trends-grid-section{
+        border: 1px dashed gray;
+        border-radius: 16px;
+        color: white !important;
+    }
+
+    .trend-title .h2{
+        color: #fff !important;
+        font-size: 20px !important;
+    }
+
+     .trends-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+        width: 100%;    
+       
+    }
+
+    .trend-item{
+          border: 1px dashed gray;
+          padding: 50px;
+          position: relative;
+          overflow: hidden;
+    }
+
+    .floating-icon{
+        position: absolute;
+        top: -20px;
+        right: -1px;
+    }
+
+    @media screen and (max-width: 768px) {
+        .section-header-trend{
+            padding: 30px 20px  0 20px;
+        }
+        .section-header-trend h1{
+            font-size: 28px;
+        }
+        .section-header-trend p{
+            font-size: 14px;
+        }
+        .trend-item{
+            padding-left: 20px;
+            border-left: none;
+        }
+        .trends-grid{
+             grid-template-columns: repeat(auto-fit, minmax(340px, 1fr));
+        }
+    }
+
+</style>
+
+{% schema %}
+{
+  "name": "Trends Grid",
+  "tag": "section",
+  "class": "trends-grid-section",
+  "max_blocks": 6,
+  "settings": [
+    {
+      "type": "text",
+      "id": "section_heading",
+      "label": "Section Heading",
+      "default": "What's Trending"
+    },
+    {
+      "type": "text",
+      "id": "section_subtext",
+      "label": "Section Subtext",
+      "default": "Discover top picks tailored for your style."
+    }
+  ],
+  "blocks": [
+    {
+      "type": "trend_item",
+      "name": "Trend Item",
+      "settings": [
+        {
+          "type": "image_picker",
+          "id": "icon",
+          "label": "Icon"
+        },
+          {
+        "type": "image_picker",
+        "id": "floating_icon",
+        "label": "Floating Icon"
+        },
+        
+        {
+          "type": "text",
+          "id": "title",
+          "label": "Title",
+          "default": "Minimal Aesthetic"
+        },
+        {
+          "type": "textarea",
+          "id": "description",
+          "label": "Description",
+          "default": "Clean lines and subtle tones define this trend."
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Trends Grid",
+      "category": "Custom Sections",
+      "blocks": [
+        {
+          "type": "trend_item"
+        },
+        {
+          "type": "trend_item"
+        },
+        {
+          "type": "trend_item"
+        }
+      ]
+    }
+  ]
+}
+
+{% endschema %}
