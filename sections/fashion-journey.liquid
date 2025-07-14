@@ -1,0 +1,161 @@
+{% schema %}
+{
+  "name": "Fashion Journey",
+  "tag": "section",
+  "settings": [
+    {
+      "type": "text",
+      "id": "title",
+      "label": "Section Title",
+      "default": "Navigating the StyleLoom Fashion Journey"
+    },
+    {
+      "type": "textarea",
+      "id": "description",
+      "label": "Intro Description",
+      "default": "We've designed a straightforward shopping experience to make fashion accessible."
+    }
+  ],
+  "blocks": [
+    {
+      "type": "step",
+      "name": "Step",
+      "settings": [
+        {
+          "type": "text",
+          "id": "number",
+          "label": "Step Number",
+          "default": "Step 01"
+        },
+        {
+          "type": "text",
+          "id": "title",
+          "label": "Step Title",
+          "default": "Discover Trends"
+        },
+        {
+          "type": "textarea",
+          "id": "description",
+          "label": "Step Description",
+          "default": "Explore our curated collection of over 1000 styles, spanning global fashion trends."
+        }
+      ]
+    }
+  ],
+  "max_blocks": 4,
+  "presets": [
+    {
+      "name": "Fashion Journey Default",
+      "category": "Custom"
+    }
+  ]
+}
+{% endschema %}
+
+<section class="fashion-journey-section">
+  <div class="container">
+    <div class="header-nav-style">
+      <h1>{{ section.settings.title }}</h1>
+      <p>{{ section.settings.description }}</p>
+      <svg width="196" height="213" viewBox="0 0 196 213" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <g clip-path="url(#clip0_152_869)">
+      <mask id="mask0_152_869" style="mask-type:luminance" maskUnits="userSpaceOnUse" x="0" y="-116" width="361" height="361">
+      <path d="M361 -116H0V245H361V-116Z" fill="white"/>
+      </mask>
+      <g mask="url(#mask0_152_869)">
+      <path fill-rule="evenodd" clip-rule="evenodd" d="M193.393 -116H167.607V-1.82815L124.838 -107.686L100.929 -98.027L144.807 10.5736L61.9839 -72.2495L43.7507 -54.0161L123.133 25.366L20.2595 -19.5803L9.93579 4.04857L118.788 51.6071H0V77.3931H118.788L9.93582 124.951L20.2595 148.581L123.133 103.634L43.7507 183.016L61.9839 201.249L144.807 118.426L100.929 227.028L124.838 236.686L167.607 130.828V245H193.393V130.828L236.163 236.686L260.07 227.028L216.194 118.426L299.016 201.249L317.249 183.016L237.867 103.634L340.741 148.581L351.063 124.951L242.213 77.3931H361V51.6071H242.211L351.063 4.04857L340.741 -19.5803L237.867 25.366L317.249 -54.0163L299.016 -72.2495L216.194 10.5735L260.07 -98.027L236.163 -107.686L193.393 -1.82815V-116Z" fill="#C2B4A3"/>
+      </g>
+      </g>
+      <defs>
+      <clipPath id="clip0_152_869">
+      <rect width="361" height="361" fill="white" transform="translate(0 -116)"/>
+      </clipPath>
+      </defs>
+      </svg>
+
+    </div>
+    <div class="steps">
+      {% for block in section.blocks %}
+        <div class="step">
+          <h2>{{ block.settings.number }}</h2>
+          <h3>{{ block.settings.title }}</h3>
+          <p>{{ block.settings.description }}</p>
+        </div>
+      {% endfor %}
+    </div>
+  </div>
+</section>
+
+<style>
+  .header-nav-style svg{
+    position: absolute;
+    right: 0;
+    top: 0;
+  }
+
+  .header-nav-style{
+      padding: 60px;
+      position: relative;
+    }
+  
+  .header-nav-style h1{
+    font-size: 38px;
+  }
+
+   .header-nav-style p{
+    font-size: 16px;
+    color: #676665;
+  }
+
+  .fashion-journey-section {
+    border: 1px dashed gray;
+    margin: 30px 0 30px 0;
+    color: #ffffff;
+    border-radius: 16px;
+  }
+
+  .fashion-journey-section .steps {
+       display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+        width: 100%;        
+  }
+
+  .fashion-journey-section .step{
+    border-top: 1px dashed gray;
+    border-right: 1px dashed gray;
+    padding: 40px;
+  }
+
+  .fashion-journey-section .step h2 {
+    margin-top: 0;
+    color: #676665;
+    font-size: 18px;
+  }
+
+   .fashion-journey-section .step h3 {
+    font-size: 22px !important;
+  }
+
+   .fashion-journey-section .step p {
+      font-size: 16px;
+      color: #676665;
+  }
+    @media screen and (max-width: 768px) {
+      .header-nav-style{
+        padding: 20px 30px;
+      }
+        .header-nav-style h1{
+          font-size: 28px;
+        }
+
+        .header-nav-style p{
+          font-size: 14px;
+        }
+        .fashion-journey-section .steps {
+            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));   
+      }
+       .header-nav-style svg{
+        display: none;
+      }
+    }
+</style>
