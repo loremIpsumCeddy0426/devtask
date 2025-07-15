@@ -1,0 +1,163 @@
+<section class="grid-collection">
+    <div class="collection-header">
+      <h2>Elevate Your Style with Our Latest Collection</h2>
+      <p>Each piece is crafted to enhance your fashion statement.</p>
+      <svg width="246" height="386" viewBox="0 0 246 386" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <path d="M397.633 316.042L320.927 240.282C313.857 233.311 318.327 221.263 328.233 220.59L435.792 213.194C449.515 212.255 450.34 192.38 436.734 190.31L330.159 174.114C320.353 172.622 316.877 160.252 324.494 153.884L407.164 84.68C417.718 75.8311 406.694 59.2728 394.469 65.5962L298.729 115.133C289.916 119.688 279.844 111.734 282.253 102.102L308.45 -2.46408C311.795 -15.8185 293.145 -22.7382 286.97 -10.4335L238.625 85.9154C234.168 94.7876 221.345 94.2474 217.637 85.0465L177.358 -14.9552C172.216 -27.7217 153.061 -22.3605 155.288 -8.76983L172.815 97.6087C174.435 107.404 163.732 114.513 155.325 109.248L63.9772 52.0119C52.314 44.7064 39.9598 60.3042 49.7657 69.973L126.472 145.734C133.542 152.705 129.072 164.754 119.166 165.426L11.6076 172.821C-2.12157 173.776 -2.94111 193.636 10.6646 195.706L117.239 211.902C127.045 213.394 130.521 225.764 122.905 232.132L40.2347 301.335C29.6876 310.168 40.711 326.726 52.9354 320.403L148.693 270.873C157.505 266.317 167.571 274.288 165.169 283.904L138.971 388.47C135.626 401.825 154.276 408.744 160.451 396.44L208.796 300.09C213.253 291.218 226.082 291.742 229.784 300.959L270.046 400.954C275.188 413.721 294.345 408.36 292.111 394.785L274.584 288.407C272.98 278.618 283.667 271.503 292.073 276.768L383.422 334.004C395.085 341.31 407.439 325.711 397.633 316.042Z" fill="#C2B4A3"/>
+      </svg>
+    <ul>
+      <li><a href="#">All</a></li>
+      <li><a href="#">Mens</a></li>
+      <li><a href="#">Womens</a></li>
+      <li><a href="#">Kids</a></li>
+    </ul>
+ 
+    </div>
+  </section>
+
+<style>
+    .grid-collection{
+      border: 1px dashed gray;
+      margin: 60px 0;
+    }
+    .collection-header{
+      position: relative;
+      padding: 80px;
+    }
+
+    .collection-header h2{
+      font-size: 48px;
+      color: white !important;
+    }
+
+      .collection-header p{
+      font-size: 18px;
+      color: #676665 !important;
+    }
+
+    .collection-header svg{
+      position: absolute;
+      top: 0;
+      right: 0
+    }
+      .collection-header ul li {
+      list-style: none;
+      display: inline-block;
+      margin: 0 5px;
+      padding: 12px 20px;
+      border: 1px dashed gray;
+      color: #B3B3B2;
+      font-size: 14px;
+      cursor: pointer;
+      border-radius: 6px;
+    }
+
+    a{
+      text-decoration: none;
+      color: #B3B3B2;
+  }
+
+</style>
+
+<script>
+  document.addEventListener('DOMContentLoaded', function () {
+    const tabs = document.querySelectorAll('.tab-item');
+    const contents = document.querySelectorAll('.tab-content');
+
+    tabs.forEach((tab, index) => {
+      tab.addEventListener('click', () => {
+        tabs.forEach(t => t.classList.remove('active'));
+        contents.forEach(c => c.classList.remove('active'));
+
+        tab.classList.add('active');
+        contents[index].classList.add('active');
+      });
+    });
+  });
+</script>
+
+{% schema %}
+{
+  "name": "Collection Grid",
+  "tag": "section",
+  "class": "collection-grid-section",
+  "max_blocks": 4,
+  "settings": [
+    {
+      "type": "text",
+      "id": "heading",
+      "label": "Heading",
+      "default": "ELEVATE YOUR STYLE WITH OUR LATEST COLLECTION"
+    },
+    {
+      "type": "textarea",
+      "id": "subheading",
+      "label": "Subheading",
+      "default": "Each piece is crafted to enhance your fashion statement."
+    },
+    {
+      "type": "text",
+      "id": "button_label",
+      "label": "Button Text",
+      "default": "Shop Now"
+    },
+    {
+      "type": "checkbox",
+      "id": "show_tabs",
+      "label": "Enable Tabs",
+      "default": true
+    }
+  ],
+  "blocks": [
+    {
+      "type": "tab",
+      "name": "Collection Tab",
+      "settings": [
+        {
+          "type": "text",
+          "id": "tab_title",
+          "label": "Tab Title",
+          "default": "All"
+        },
+        {
+          "type": "collection",
+          "id": "tab_collection",
+          "label": "Collection"
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Collection Grid",
+      "category": "Collection",
+      "blocks": [
+        {
+          "type": "tab",
+          "settings": {
+            "tab_title": "All"
+          }
+        },
+        {
+          "type": "tab",
+          "settings": {
+            "tab_title": "Womens"
+          }
+        },
+        {
+          "type": "tab",
+          "settings": {
+            "tab_title": "Mens"
+          }
+        },
+        {
+          "type": "tab",
+          "settings": {
+            "tab_title": "Kids"
+          }
+        }
+      ]
+    }
+  ]
+}
+{% endschema %}
