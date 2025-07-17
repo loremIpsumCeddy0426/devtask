@@ -1,3 +1,10 @@
+@font-face {
+  font-family: 'Roboto Mono';
+  src: url('https://cdn.shopify.com/s/files/1/0750/5015/6265/files/RobotoMono.woff?v=1752722306') format('woff');
+  font-weight: normal;
+  font-style: normal;
+}
+
 :root {
   --alpha-button-background: 1;
   --alpha-button-border: 1;
@@ -6,6 +13,12 @@
   --focused-base-outline: 0.2rem solid rgba(var(--color-foreground), 0.5);
   --focused-base-outline-offset: 0.3rem;
   --focused-base-box-shadow: 0 0 0 0.3rem rgb(var(--color-background)), 0 0 0.5rem 0.4rem rgba(var(--color-foreground), 0.3);
+  --base-font: 'Roboto Mono';
+
+}
+
+* {
+  font-family: var(--base-font);
 }
 
 body{
