@@ -13,6 +13,27 @@
     </ul>
  
     </div>
+  <div class="grid-container">
+  {% for block in section.blocks %}
+    {% if block.type == 'collection_item' %}
+      <div class="grid-item">
+        <img 
+          src="{{ block.settings.product_image | image_url }}" 
+          alt="{{ block.settings.product_name }}" 
+          width="386" 
+          height="291"
+        >
+        <div class="product-info">
+          <span class="product-tags">{{ block.settings.product_tags }}</span>
+          <h2>{{ block.settings.product_name }}</h2>
+          <p class="product-size">Size: {{ block.settings.product_size }}</p>
+          <p class="product-price">Price: {{ block.settings.product_price }}</p>
+          <button class="shop-now">{{ section.settings.button_label }}</button>
+        </div>
+      </div>
+    {% endif %}
+  {% endfor %}
+</div>
   </section>
 
 <style>
@@ -52,10 +73,25 @@
       border-radius: 6px;
     }
 
+    .collection-header ul{
+      padding: 0 !important;
+    }
+
     a{
       text-decoration: none;
       color: #B3B3B2;
-  }
+    }
+    .grid-container {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+    }
+
+    .grid-item {
+      border-right: 1px dashed gray;
+      border-top: 1px dashed gray;
+      padding: 20px;
+
+    }
 
 </style>
 
@@ -81,7 +117,7 @@
   "name": "Collection Grid",
   "tag": "section",
   "class": "collection-grid-section",
-  "max_blocks": 4,
+  "max_blocks": 6,
   "settings": [
     {
       "type": "text",
@@ -100,29 +136,41 @@
       "id": "button_label",
       "label": "Button Text",
       "default": "Shop Now"
-    },
-    {
-      "type": "checkbox",
-      "id": "show_tabs",
-      "label": "Enable Tabs",
-      "default": true
     }
   ],
   "blocks": [
     {
-      "type": "tab",
-      "name": "Collection Tab",
+      "type": "collection_item",
+      "name": "Collection Item",
       "settings": [
         {
-          "type": "text",
-          "id": "tab_title",
-          "label": "Tab Title",
-          "default": "All"
+          "type": "image_picker",
+          "id": "product_image",
+          "label": "Product Image"
         },
         {
-          "type": "collection",
-          "id": "tab_collection",
-          "label": "Collection"
+          "type": "text",
+          "id": "product_name",
+          "label": "Product Name",
+          "default": "Timeless A-line Evening Dress"
+        },
+        {
+          "type": "text",
+          "id": "product_tags",
+          "label": "Product Tags",
+          "default": "Womenswear"
+        },
+        {
+          "type": "text",
+          "id": "product_size",
+          "label": "Size",
+          "default": "Ankle-length"
+        },
+        {
+          "type": "text",
+          "id": "product_price",
+          "label": "Price",
+          "default": "$109.99"
         }
       ]
     }
@@ -133,28 +181,16 @@
       "category": "Collection",
       "blocks": [
         {
-          "type": "tab",
-          "settings": {
-            "tab_title": "All"
-          }
+          "type": "collection_item"
         },
         {
-          "type": "tab",
-          "settings": {
-            "tab_title": "Womens"
-          }
+          "type": "collection_item"
         },
         {
-          "type": "tab",
-          "settings": {
-            "tab_title": "Mens"
-          }
+          "type": "collection_item"
         },
         {
-          "type": "tab",
-          "settings": {
-            "tab_title": "Kids"
-          }
+          "type": "collection_item"
         }
       ]
     }
